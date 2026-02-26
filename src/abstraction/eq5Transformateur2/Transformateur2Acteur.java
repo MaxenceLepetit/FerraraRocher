@@ -15,7 +15,6 @@ public class Transformateur2Acteur implements IActeur {
 	
 	protected int cryptogramme;
 	private List<Journal> Journaux;
-	private static int Etape;
 
 	public Transformateur2Acteur() {
 		this.Journaux = new ArrayList<Journal>();
@@ -44,7 +43,7 @@ public class Transformateur2Acteur implements IActeur {
 
 	public void next() {
 		for (int i = 0; i < 6; i++){
-			this.Journaux.get(i).ajouter(Integer.toString((Filiere.LA_FILIERE.getEtape())));
+			this.Journaux.get(i).ajouter("Etape : "+ Integer.toString((Filiere.LA_FILIERE.getEtape()))+ "\n");
 		}
 	}
 
