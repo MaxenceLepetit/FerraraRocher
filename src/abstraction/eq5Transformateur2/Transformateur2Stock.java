@@ -21,6 +21,9 @@ public class Transformateur2Stock extends Transformateur2Acteur{
     private HashMap<Feve, Double> stock_chocolat;
     
     // Constructeur
+
+    /* Auteur Partie Feve --> Pierre
+    */
     public Transformateur2Stock(){
         this.stock_feve = new HashMap<Feve, Double>();
         this.stock_feve.put(Feve.F_BQ, 0.0);
@@ -34,35 +37,47 @@ public class Transformateur2Stock extends Transformateur2Acteur{
 
     // Méthodes
 
-    public void add_feve(double n, Feve Q){
+    // Auteur Pierre
+    public Double getStock_feve(){
+        return this.stock_feve.get(Feve.F_BQ) + this.stock_feve.get(Feve.F_BQ_E) + this.stock_feve.get(Feve.F_MQ) + this.stock_feve.get(Feve.F_MQ_E) + this.stock_feve.get(Feve.F_HQ) + this.stock_feve.get(Feve.F_HQ_E);
+        }
+    
+    // Auteur Pierre
+    public Double getStock_chocolat(){
+        return this.stock_chocolat.get(Chocolat.C_BQ) + this.stock_feve.get(Chocolat.C_BQ_E) + this.stock_feve.get(Chocolat.C_MQ) + this.stock_feve.get(Chocolat.C_MQ_E) + this.stock_feve.get(Chocolat.C_HQ) + this.stock_feve.get(Chocolat.C_HQ_E);
+        }
+
+    // Auteur Pierre
+    public void add_feve(Double n, Feve Q){
         if (Q == Feve.F_BQ){
             this.stock_feve.put(Feve.F_BQ, this.stock_feve.get(Feve.F_BQ) + n);
         } else if (Q == Feve.F_BQ_E){
-            this.stock_feve.add(1, n);
+            this.stock_feve.put(Feve.F_BQ_E, this.stock_feve.get(Feve.F_BQ_E) + n);
         } else if (Q == Feve.F_MQ){
-            this.stock_feve.add(2, n);
+            this.stock_feve.put(Feve.F_MQ, this.stock_feve.get(Feve.F_MQ) + n);
         } else if (Q == Feve.F_MQ_E){
-            this.stock_feve.add(3, n);
+            this.stock_feve.put(Feve.F_MQ_E, this.stock_feve.get(Feve.F_MQ_E) + n);
         } else if (Q == Feve.F_HQ){
-            this.stock_feve.add(4, n);
+            this.stock_feve.put(Feve.F_HQ, this.stock_feve.get(Feve.F_HQ) + n);
         } else {
-            this.stock_feve.add(5, n);
+            this.stock_feve.put(Feve.F_HQ_E, this.stock_feve.get(Feve.F_HQ_E) + n);
         }
     }
 
-    public void remove_feve(int n, Feve Q){
-        if (Q == Feve.F_BQ & n <= this.stock_feve.get(0)){
-            this.stock_feve.add(0, -n);
-        } else if (Q == Feve.F_BQ_E & n <= this.stock_feve.get(1)){
-            this.stock_feve.add(1, -n);
-        } else if (Q == Feve.F_MQ & n <= this.stock_feve.get(2)){
-            this.stock_feve.add(2, -n);
-        } else if (Q == Feve.F_MQ_E & n <= this.stock_feve.get(3)){
-            this.stock_feve.add(3, -n);
-        } else if (Q == Feve.F_HQ & n <= this.stock_feve.get(4)){
-            this.stock_feve.add(4, -n);
-        } else if (n <= this.stock_feve.get(5)){
-            this.stock_feve.add(5, -n);
+    // Auteur Pierre
+    public void remove_feve(Double n, Feve Q){
+        if (Q == Feve.F_BQ & n <= this.stock_feve.get(Feve.F_BQ)){
+            this.stock_feve.put(Feve.F_BQ, this.stock_feve.get(Feve.F_BQ) - n);
+        } else if (Q == Feve.F_BQ_E & n <= this.stock_feve.get(Feve.F_BQ_E)){
+            this.stock_feve.put(Feve.F_BQ_E, this.stock_feve.get(Feve.F_BQ_E) - n);
+        } else if (Q == Feve.F_MQ & n <= this.stock_feve.get(Feve.F_MQ)){
+            this.stock_feve.put(Feve.F_MQ, this.stock_feve.get(Feve.F_MQ) - n);
+        } else if (Q == Feve.F_MQ_E & n <= this.stock_feve.get(Feve.F_MQ_E)){
+            this.stock_feve.put(Feve.F_MQ_E, this.stock_feve.get(Feve.F_MQ_E) - n);
+        } else if (Q == Feve.F_HQ & n <= this.stock_feve.get(Feve.F_HQ)){
+            this.stock_feve.put(Feve.F_HQ, this.stock_feve.get(Feve.F_HQ) - n);
+        } else if (n <= this.stock_feve.get(Feve.F_HQ_E)){
+            this.stock_feve.put(Feve.F_HQ_E, this.stock_feve.get(Feve.F_HQ_E) - n);;
         }
     }
 }
