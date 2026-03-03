@@ -11,10 +11,16 @@ import abstraction.eqXRomu.general.Variable;
 import abstraction.eqXRomu.produits.IProduit;
 
 public class Producteur1Acteur implements IActeur {
-	
+
+	protected Journal journal;
+
 	protected int cryptogramme;
 
 	public Producteur1Acteur() {
+
+		//Créer un journal à chaque next)
+		this.journal = new Journal("Journal "+this.getNom(), this);
+		this.journal.ajouter("Check");
 	}
 	
 	public void initialiser() {
@@ -58,6 +64,7 @@ public class Producteur1Acteur implements IActeur {
 	// Renvoie les journaux
 	public List<Journal> getJournaux() {
 		List<Journal> res=new ArrayList<Journal>();
+		res.add(this.journal);
 		return res;
 	}
 
