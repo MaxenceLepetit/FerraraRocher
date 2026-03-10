@@ -15,6 +15,7 @@ public class Transformateur2Acteur implements IActeur {
 	
 	protected int cryptogramme;
 	private List<Journal> Journaux;
+	public static Double prix_MP;
 
 	/** @author Pierre
     **/

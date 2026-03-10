@@ -6,6 +6,7 @@ import abstraction.eqXRomu.produits.Gamme;
 import abstraction.eqXRomu.produits.IProduit;
 import abstraction.eqXRomu.filiere.Banque;
 import abstraction.eqXRomu.filiere.Filiere;
+import abstraction.eqXRomu.filiere.IActeur;
 
 /** @author Pierre
  */
@@ -20,11 +21,11 @@ public class Transformateur2ProductionChocolat extends Transformateur2VendeurAux
         assert p >= 0.45;
         Double f = p * n;
         if ( f <= this.getStock_feve(q) ){
-            Double a = (1 - p) * prix_MP;
+            Double a = n* (1 - p) * prix_MP;
             if ( a <= this.getSolde()){
                 if (true /* Machine & Employé Dispo */){
                     this.remove_feve(f, q);
-                    Filiere.LA_FILIERE.getBanque().payerCout();
+                    Filiere.LA_FILIERE.getBanque().payerCout(this, cryptogramme, "Achat de MP pour production de chocolat", prix_MP);
                     /* Occupation */
                     // Calcul Quali
                     Double Q = 0.0;
@@ -35,14 +36,15 @@ public class Transformateur2ProductionChocolat extends Transformateur2VendeurAux
                     } else if (q == Feve.F_HQ){
                         Q = p + 3;
                     } 
-                    if ( Q < 2.58 ){
-                        this.add_chocolat(n,Chocolat.C_BQ);
-                    } else if ( 2.58 <= Q & Q < 3.575 & p >= 0.60 ){
-                        this.add_chocolat(n,Chocolat.C_MQ);
-                    } else if ( 3.575 <= Q & p >= 0.80 ){
+                    if ( 3.575 <= Q & p >= 0.80 ){
                         this.add_chocolat(n,Chocolat.C_HQ);
+                    } else if ( 2.58 <= Q & p >= 0.60 ){
+                        this.add_chocolat(n,Chocolat.C_MQ);
+                    } else {
+                        this.add_chocolat(n,Chocolat.C_BQ);
                     }
                 }
             }
         }
     }
+}
